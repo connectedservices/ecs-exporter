@@ -8,9 +8,9 @@ import (
 	"github.com/aws/aws-sdk-go/service/ecs"
 	"github.com/golang/mock/gomock"
 
-	"github.com/slok/ecs-exporter/log"
-	"github.com/slok/ecs-exporter/mock/aws/sdk"
-	"github.com/slok/ecs-exporter/types"
+	"github.com/connectedservices/ecs-exporter/log"
+	"github.com/connectedservices/ecs-exporter/mock/aws/sdk"
+	"github.com/connectedservices/ecs-exporter/types"
 )
 
 // MockECSListClusters mocks the listing of cluster arns

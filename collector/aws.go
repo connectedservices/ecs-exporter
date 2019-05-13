@@ -9,8 +9,8 @@ import (
 	"github.com/aws/aws-sdk-go/service/ecs"
 	"github.com/aws/aws-sdk-go/service/ecs/ecsiface"
 
-	"github.com/slok/ecs-exporter/log"
-	"github.com/slok/ecs-exporter/types"
+	"github.com/connectedservices/ecs-exporter/log"
+	"github.com/connectedservices/ecs-exporter/types"
 )
 
 const (
