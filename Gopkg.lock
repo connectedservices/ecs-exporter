@@ -8,19 +8,15 @@
 
 [[projects]]
   name = "github.com/aws/aws-sdk-go"
-  packages = ["aws","aws/awserr","aws/awsutil","aws/client","aws/client/metadata","aws/corehandlers","aws/credentials","aws/credentials/ec2rolecreds","aws/credentials/endpointcreds","aws/credentials/stscreds","aws/defaults","aws/ec2metadata","aws/request","aws/session","aws/signer/v4","private/endpoints","private/protocol","private/protocol/json/jsonutil","private/protocol/jsonrpc","private/protocol/query","private/protocol/query/queryutil","private/protocol/rest","private/protocol/xml/xmlutil","private/waiter","service/ecs","service/ecs/ecsiface","service/sts"]
-  revision = "92ed7a76d078fc5b792a3b5c834274c8dc89d10a"
+  packages = ["aws","aws/awserr","aws/awsutil","aws/client","aws/client/metadata","aws/corehandlers","aws/credentials","aws/credentials/ec2rolecreds","aws/credentials/endpointcreds","aws/credentials/processcreds","aws/credentials/stscreds","aws/csm","aws/defaults","aws/ec2metadata","aws/endpoints","aws/request","aws/session","aws/signer/v4","internal/ini","internal/sdkio","internal/sdkrand","internal/sdkuri","internal/shareddefaults","private/protocol","private/protocol/json/jsonutil","private/protocol/jsonrpc","private/protocol/query","private/protocol/query/queryutil","private/protocol/rest","private/protocol/xml/xmlutil","service/ecs","service/ecs/ecsiface","service/sts"]
+  revision = "d2d56572a432fff4d2dca7b4e52b3ee956d5c4bc"
+  version = "v1.19.28"
 
 [[projects]]
   branch = "master"
   name = "github.com/beorn7/perks"
   packages = ["quantile"]
   revision = "4c0e84591b9aa9e6dcfdf3e020114cd81f89d5f9"
-
-[[projects]]
-  name = "github.com/go-ini/ini"
-  packages = ["."]
-  revision = "2ba15ac2dc9cdf88c110ec2dc0ced7fa45f5678c"
 
 [[projects]]
   name = "github.com/golang/mock"
@@ -33,10 +29,9 @@
   revision = "8ee79997227bf9b34611aee7946ae64735e6fd93"
 
 [[projects]]
-  branch = "master"
   name = "github.com/jmespath/go-jmespath"
   packages = ["."]
-  revision = "bd40a432e4c76585ef6b72d3fd96fb9b6dc7b68d"
+  revision = "c2b33e84"
 
 [[projects]]
   branch = "master"

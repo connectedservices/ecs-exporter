@@ -2,6 +2,7 @@ package collector
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/session"
@@ -169,12 +170,18 @@ func (e *ECSClient) GetClusterServices(cluster *types.ECSCluster) ([]*types.ECSS
 			ss := []*types.ECSService{}
 
 			for _, s := range resp.Services {
+				steady := false
+				if strings.Contains(aws.StringValue(s.Events[0].Message), " has reached a steady state.") {
+					steady = true
+				}
+
 				es := &types.ECSService{
 					ID:       aws.StringValue(s.ServiceArn),
 					Name:     aws.StringValue(s.ServiceName),
 					DesiredT: aws.Int64Value(s.DesiredCount),
 					RunningT: aws.Int64Value(s.RunningCount),
 					PendingT: aws.Int64Value(s.PendingCount),
+					Steady:   steady,
 				}
 				ss = append(ss, es)
 			}
