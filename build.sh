@@ -13,6 +13,7 @@ SRC="./cmd/ecs-exporter/"
 #F_REV="-X github.com/slok/ecs-exporter/version.Revision=${REVISION}"
 #F_BR="-X github.com/slok/ecs-exporter/version.Branch=${BRANCH}"
 #F_DA="-X github.com/slok/ecs-exporter/version.BuildDate=${DATE}"
-F_CMP="-w -linkmode external -extldflags '-static'"
+#F_CMP="-w -linkmode external -extldflags '-static'"
+F_CMP="-w -linkmode external"
 
 go build -o ${OUT} --ldflags "${F_VER} ${F_REV} ${F_BR} ${F_DA} ${F_CMP}" ${SRC}

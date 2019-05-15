@@ -9,8 +9,8 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/common/version"
 
-	"github.com/slok/ecs-exporter/log"
-	"github.com/slok/ecs-exporter/types"
+	"github.com/connectedservices/ecs-exporter/log"
+	"github.com/connectedservices/ecs-exporter/types"
 )
 
 const (
@@ -56,6 +56,12 @@ var (
 	serviceRunning = prometheus.NewDesc(
 		prometheus.BuildFQName(namespace, "", "service_running_tasks"),
 		"The number of tasks in the cluster that are in the RUNNING state regarding a service",
+		[]string{"region", "cluster", "service"}, nil,
+	)
+
+	serviceSteady = prometheus.NewDesc(
+		prometheus.BuildFQName(namespace, "", "service_steady"),
+		"1 if service is in STREADY state",
 		[]string{"region", "cluster", "service"}, nil,
 	)
 
@@ -145,6 +151,7 @@ func (e *Exporter) Describe(ch chan<- *prometheus.Desc) {
 	ch <- serviceDesired
 	ch <- servicePending
 	ch <- serviceRunning
+	ch <- serviceSteady
 
 	if e.noCIMetrics {
 		return
@@ -263,6 +270,13 @@ func (e *Exporter) collectClusterServicesMetrics(ctx context.Context, ch chan<- 
 
 		// Running task count
 		sendSafeMetric(ctx, ch, prometheus.MustNewConstMetric(serviceRunning, prometheus.GaugeValue, float64(s.RunningT), e.region, cluster.Name, s.Name))
+
+		// Steady state
+		fSteady := 0
+		if s.Steady {
+			fSteady = 1
+		}
+		sendSafeMetric(ctx, ch, prometheus.MustNewConstMetric(serviceSteady, prometheus.GaugeValue, float64(fSteady), e.region, cluster.Name, s.Name))
 	}
 }
 
