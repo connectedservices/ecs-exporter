@@ -7,7 +7,7 @@ jobs:
       - image: alpine:3.8
         user: root
         environment:
-          ECR_REPOSITORY_PREFIX: oneconnect/ecs-exporter
+          ECR_REPOSITORY: oneconnect/ecs-exporter
     steps:
       - run:
           name: Install system dependencies
@@ -28,15 +28,10 @@ jobs:
           name: Build Docker image
           command: |
             eval $(aws ecr get-login --no-include-email)
-
-            if [ -n "${CIRCLE_TAG}" ]; then
-              DOCKER_TAG=${CIRCLE_TAG};
-              ECR_REPOSITORY="${ECR_REPOSITORY_PREFIX}-release"
-            else
-              DOCKER_TAG=sha-${CIRCLE_SHA1::7};
-              ECR_REPOSITORY="${ECR_REPOSITORY_PREFIX}-snapshot"
+            if [ -n "${CIRCLE_TAG}" ];
+              then DOCKER_TAG=${CIRCLE_TAG};
+            else DOCKER_TAG=sha-${CIRCLE_SHA1::7};
             fi
-
             docker build -t ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}:${DOCKER_TAG} .
             docker push ${AWS_ACCOUNT_ID}.dkr.ecr.${AWS_REGION}.amazonaws.com/${ECR_REPOSITORY}:${DOCKER_TAG}
 workflows:
